@@ -2,8 +2,8 @@
 
 /**
  *main - Entry point
- *
- *Description: A C program  print printing print function 
+ l*
+ *Description: A C program  print printing print function
  *
  * Return: Always 0 (Success)
 */
