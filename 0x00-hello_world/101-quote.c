@@ -3,11 +3,11 @@
 /**
  * main - Entry Point
  *
- * Descrption: writing a qouat message  useing write from  nuistd.h
+ * description: writing a qouat message  useing write from  nuistd.h
  *
  * write function parameters 1-buffer start point 2-name of buffer 3- bufSize
  *
- * return: 1 (not success)
+ * Return: 1 (not success)
 */
 
 int main(void)
