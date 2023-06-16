@@ -3,7 +3,7 @@
 /**
  *main - Entry point
  *
- *Description: A C program  print siing print function 
+ *Description: A C program  print printing print function 
  *
  * Return: Always 0 (Success)
 */
