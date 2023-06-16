@@ -3,7 +3,7 @@
 /**
 * main - Entry point
 *
-* Descrption: A C Program Printing Data Type sizes Function
+* Descrption: A C Program for Printing  sizes of Types using printf Function
 *
 * Return: Alawys: 0 (Success)
 */
