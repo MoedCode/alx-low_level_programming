@@ -10,7 +10,7 @@
 */
 int main(void)
 {
-	for (int i = 97; i < 123 ; i++)
+	for (int i = 122; i > 96 ; i--)
 		putchar(i);
 	putchar('\n');
 	return (0);
