@@ -12,7 +12,7 @@ int main(void)
 {
 	int chint = 0;
 
-	for (; chint < 9; chint++)
+	for (; chint < 10; chint++)
 	{
 		putchar(chint + '0');
 	}
