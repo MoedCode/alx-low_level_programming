@@ -11,37 +11,27 @@
 
 int main(void)
 {
-	int n0 = 0, n1, n2, n3;
+	int n0 = 0, n1;
 
-	while (n0 <= 9)
+	while (n0 <= 99)
 	{
-		n1 = 0;
+		n1 = n0;
 
-		while (n1 <= 9)
+		while (n1 <= 99)
 		{
-			n2 = 0;
-
-			while (n2 <= 9)
+			if (n1 != n0)
 			{
-				n3 = 0;
-				while (n3 <= 9)
+				putchar((n0 / 10) + 48);
+				putchar((n0 % 10) + 48);
+				putchar(' ');
+				putchar((n1 / 10) + 48);
+				putchar((n1 % 10) + 48);
+
+				if (n0 != 98 || n1 != 99)
 				{
-					putchar(n0 + 48);
-					putchar(n1 + 48);
-					putchar(' ');
-					putchar(n2 + 48);
-					putchar(n3 + 48);
-					putchar(' ');
 					putchar(',');
-					if (n0 == 9 &&  n1 == 8 &&  n2 == 9 &&  n3 == 9)
-					{
-						return (0);
-					}
-					n3++;
-
-
+					putchar(' ');
 				}
-				n2++;
 			}
 			n1++;
 		}
