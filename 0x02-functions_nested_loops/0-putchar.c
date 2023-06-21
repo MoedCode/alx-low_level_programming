@@ -1,15 +1,23 @@
-#include <unistd.h>
-#include <main.h>
+#include <stddef.h>
+#include "main.h"
 
 /**
- * _putchar - prints char c to stdout
- * @c : the character to print
+ * main - Entry point
  *
- * Return: 0 on Sucsess , any integer else for failed
+ * Description: a program that prints _putchar, followed by a new line.
+ *
+ * Return: 0 On  succsess , and any integer  else On Error
  */
-
-int _putchar(char c)
+int main(void)
 {
-	write(1, &c, sizeof(c));
+	char strArr[] = "_putchar";
+	int len = sizeof(strArr) - 1;
+	int i ;
+
+	for (i = 0; i < len ; i++)
+	{
+		_putchar(strArr[i]);
+	}
+	_putchar('\n');
 	return (0);
 }
