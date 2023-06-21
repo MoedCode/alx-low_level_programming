@@ -1,10 +1,10 @@
 #include"main.h"
 /**
- * print_aTOz - function  prints all  alphabet in lower case
+ * print_alphabet - function  prints all  alphabet in lower case
  *
  */
 
-void printAlph(void)
+void print_alphabet(void)
 {
 	int i;
 
