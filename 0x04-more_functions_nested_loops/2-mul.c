@@ -1,5 +1,8 @@
+#include "main.h"
+#include <stdio.h>
+
 /**
-* _isupper -  multiplies two integers
+ * mul - returns multiplication of  two integers
  *
  * @a: from type int
  *
