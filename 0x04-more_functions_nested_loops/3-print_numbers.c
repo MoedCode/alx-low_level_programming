@@ -1,3 +1,4 @@
+#include <main.h>
 /**
  * print_numbers - prints from 0 to 9 followed by \n
  *
@@ -14,4 +15,4 @@ void print_numbers(void)
 		_putchar(i);
 		_putchar('\n');
 	}
-}
+cd }
