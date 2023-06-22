@@ -1,5 +1,5 @@
 /**
-* _isupper - check if the digit in {1..9}
+ * _isdigit - check if the digit in {1..9}
  *
  * @c: from type int
  *
