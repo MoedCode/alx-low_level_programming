@@ -15,4 +15,5 @@ int add(int, int);
 void print_to_98(int n);
 void print_times_table(int n);
 int positive_or_negative(int i);
+int largest_number(int a, int b, int c);
 #endif
