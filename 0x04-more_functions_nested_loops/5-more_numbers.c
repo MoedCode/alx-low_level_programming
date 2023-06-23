@@ -20,9 +20,9 @@ void more_numbers(void)
 				_putchar(1 + 48);
 				val = col % 10;
 			}
-			_putchar(val + 48)
+			_putchar(val + 48);
 
 		}
-		_putchar('\n')
+		_putchar('\n');
 	}
 }
