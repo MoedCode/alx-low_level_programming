@@ -2,15 +2,14 @@
 #include <math.h>
 
 /**
- * isPrime - finds the largest prime number
+ * main - Entry point for the program
+ *
+ * Description: isPrime  Checks if a given number is prime
+ *
  * @n: type long long int
  *
- * description: function
- *
- * Return: largest prime number
- *
+ * Return: Always 0
  */
-
 
 int isPrime(long long int n)
 {
@@ -27,15 +26,6 @@ int isPrime(long long int n)
 	}
 	return (1);
 }
-
-/**
- * main - Entry point
- *
- * description: function
- *
- * Return: 0
- */
-
 
 int main(void)
 {
