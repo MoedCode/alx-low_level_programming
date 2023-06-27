@@ -1,4 +1,20 @@
 #include "main.h"
+#include"main.h"
+/**
+ * _strlen - returns the length of a string.
+ *
+ * @s: char*
+ *
+ * Return: string length
+ */
+int _strlen(char *s)
+{
+	int ln = 0;
+
+	while (s[ln] != '\0')
+		ln++;
+	return (ln);
+}
 
 /**
  * _atoi -  string to an integer
@@ -8,30 +24,30 @@
  */
 int _atoi(char *s)
 {
-	int sgn,  num = 0;
+	int sign = 1, i, toAscii, tmp, ln = _strlen(s);
+	unsigned int accNum;
 
-	while (*s == ' ')
+	for (i = 0; i < ln; i++)
 	{
-		s++;
-	}
-
-	if (*s == '-')
-	{
-        	sgn = -1;
-		s++;
-	}
-	else if (*s == '+')
-	{
-		s++;
-	}
-	while (*s >= '0' && *s <= '9')
-	{
-		 if (num > INT_MAX / 10 || (num == INT_MAX / 10 && (*s - '0') > INT_MAX % 10))
+		toAscii = (int)s[i];
+		if ((isN > 0 && toAscii < 47) || (isN > 0 && toAscii > 58))
 		{
-			return sign == -1 ? INT_MIN : INT_MAX;
+			break;
 		}
-		num = num * 10 + (*s - '0');
-		s++;
+		else if ((toAscii < 47) || toAscii > 58)
+		{
+			continue;
+		}
+		if (toAscii == 45)
+		{
+			sign *= -1;
+		}
+		if (toAscii > 47 && toAscii < 58)
+		{
+			tmp = toAscii - '0';
+			accNum *= 10;
+			accNum += tmp;
+		}
 	}
-    return sign * num;
+	return (accNum *= sign);
 }
