@@ -30,6 +30,7 @@ int _atoi(char *s)
 	for (i = 0; i < ln; i++)
 	{
 		toAscii = (int)s[i];
+		if (toAscii == 45)
 		{
 			sign *= -1;
 		}
