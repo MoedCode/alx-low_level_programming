@@ -39,7 +39,7 @@ int _atoi(char *s)
 			sign *= 1;
 		if ((accNum > 0 && ascii < 47) || (accNum > 0 && ascii > 58))
 			break;
-		else if ((ascii_ < 47) || ascii > 58)
+		else if ((ascii < 47) || ascii > 58)
 			continue;
 		if (ascii > 47 && ascii < 58)
 		{
