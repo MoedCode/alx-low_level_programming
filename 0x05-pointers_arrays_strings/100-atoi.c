@@ -30,7 +30,7 @@ int _atoi(char *s)
 	for (i = 0; i < ln; i++)
 	{
 		toAscii = (int)s[i];
-		if ((isN > 0 && toAscii < 47) || (isN > 0 && toAscii > 58))
+		if ((accNum > 0 && toAscii < 47) || (accNum > 0 && toAscii > 58))
 		{
 			break;
 		}
