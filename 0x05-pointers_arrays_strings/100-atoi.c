@@ -30,6 +30,9 @@ int _atoi(char *s)
 	for (i = 0; i < ln; i++)
 	{
 		toAscii = (int)s[i];
+		{
+			sign *= -1;
+		}
 		if ((accNum > 0 && toAscii < 47) || (accNum > 0 && toAscii > 58))
 		{
 			break;
@@ -38,10 +41,7 @@ int _atoi(char *s)
 		{
 			continue;
 		}
-		if (toAscii == 45)
-		{
-			sign *= -1;
-		}
+
 		if (toAscii > 47 && toAscii < 58)
 		{
 			tmp = toAscii - '0';
