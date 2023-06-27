@@ -24,30 +24,31 @@ int _strlen(char *s)
  */
 int _atoi(char *s)
 {
-	int sign = 1, i, ascii, tmp;
-	unsigned int accNum = 0;
+	int sign = 1, i, toAscii, tmp, ln = _strlen(s);
+	unsigned int accNum;
 
-	for (i = 0; i < _strlen(s); i++)
+	for (i = 0; i < ln; i++)
 	{
-		ascii = (int)s[i];
-
-		if (ascii == 45)
-
-			sign *= -1;
-		else if (ascii == 43)
-
-			sign *= 1;
-		if ((accNum > 0 && ascii < 47) || (accNum > 0 && ascii > 58))
-			break;
-		else if ((ascii_ < 47) || ascii > 58)
-			continue;
-		if (ascii > 47 && ascii < 58)
+		toAscii = (int)s[i];
+		if (toAscii == 45)
 		{
-			tmp = ascii - '0';
+			sign *= -1;
+		}
+		if ((accNum > 0 && toAscii < 47) || (accNum > 0 && toAscii > 58))
+		{
+			break;
+		}
+		else if ((toAscii < 47) || toAscii > 58)
+		{
+			continue;
+		}
+
+		if (toAscii > 47 && toAscii < 58)
+		{
+			tmp = toAscii - '0';
 			accNum *= 10;
 			accNum += tmp;
 		}
 	}
 	return (accNum *= sign);
 }
-
