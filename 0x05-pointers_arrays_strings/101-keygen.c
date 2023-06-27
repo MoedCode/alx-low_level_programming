@@ -13,14 +13,13 @@ int main(void)
 int i = 0, randN = 0, sumT = 0;
 char password[100],
 p[63] = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-posChars[63] = p;
 
 	srand(time(NULL));
 	while (sumT < (2650))/*2772 -122*/
 	{
 		randN = rand() % 62;
-		password[i] = posChars[randN];
-		sumT += posChars[randN];
+		password[i] = p[randN];
+		sumT += p[randN];
 		i++;
 	}
 	randN  = 2772 - sumT;
