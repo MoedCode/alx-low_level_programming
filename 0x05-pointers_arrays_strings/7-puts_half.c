@@ -24,15 +24,18 @@ int _strlen(char *s)
 
 void puts_half(char *str)
 {
-	int i;
-	double nn = _strlen(str);
-	int  mm = nn % 2;
+	int i, ln = _strlen(str);
 
-	if (mm != 0)
-		i = nn / 2 + 1;
+	if (ln % 2 != 0)
+	{
+		i = ln / 2 + 1;
+	}
 	else
-		i = nn / 2;
-	for (; i < nn; i++)
+	{
+		i = ln / 2;
+	}
+
+	for (; i ln; i++)
 	{
 		_putchar(str[i]);
 	}
