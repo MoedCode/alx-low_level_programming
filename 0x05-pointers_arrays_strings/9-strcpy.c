@@ -29,7 +29,7 @@ char *_strcpy(char *dest, char *src)
 {
 	int i = 0;
 
-	for (; i <= _strlen(src); i+)
+	for (; i <= _strlen(src); i++)
 	{
 		dest[i] = src[i];
 	}
