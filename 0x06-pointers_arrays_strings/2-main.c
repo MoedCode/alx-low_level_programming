@@ -1,3 +1,4 @@
+#include "main.h"
 /**
  * _strncpy - copies a 2 string argument from char*
  * @dest: sestnation
