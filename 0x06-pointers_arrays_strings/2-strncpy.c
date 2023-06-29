@@ -14,7 +14,6 @@ int _strlen(char *s)
 		ln++;
 	return (ln);
 }
-
 /**
  * _strncpy - concat tow strings
  *
@@ -26,14 +25,17 @@ int _strlen(char *s)
  * Return:concat of dest and source
  *
  */
-char *_strncpy(char *dest, char *src, int n) {
-    int i,  ln = _strlen(dest);
-    for (i = 0; i < n && i <  ln; i++) {
-        dest[i] = src[i];
-    }
-    for (; i < n; i++) {
-        dest[i] = '\0';
-    }
-    return dest;
-}
+char *_strncpy(char *dest, char *src, int n)
+{
+	int i,  ln = _strlen(dest);
 
+	for (i = 0; i < n && i <  ln; i++)
+	{
+		dest[i] = src[i];
+	}
+	for (; i < n; i++)
+	{
+		dest[i] = '\0';
+	}
+	return (dest);
+}
