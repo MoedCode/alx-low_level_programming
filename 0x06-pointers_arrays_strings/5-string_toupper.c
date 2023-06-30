@@ -1,22 +1,24 @@
 #include "main.h"
 /**
  * string_toupper - small letters to capital letters
- * @a:argument type char* for sting will be change
+ * @str:argument type char* for sting will be change
  *
  * Return: a (string after the convertion)
  */
 char *string_toupper(char *str)
 {
-	int i = 0;
+	int i, j, ASCII;
 
-	while (str[i] != '\0')
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (str[i] >= 'a' && str[i] <= 'z')
+		for (j = 'a'; j < 'z'; j++)
 		{
-			str[i] = str[i] - 32;
-
+			ASCII = (int i)str[i];
+			if (str[i] >= 'a' && str[i] <= 'z')
+			{
+				str[i] = str[i] - 32;
+			}
 		}
-		i++;
 	}
 	return (str);
 
