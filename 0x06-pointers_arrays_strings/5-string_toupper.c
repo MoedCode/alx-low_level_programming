@@ -13,8 +13,8 @@ char *string_toupper(char *str)
 	{
 		for (j = 'a'; j < 'z'; j++)
 		{
-			ASCII = (int i)str[i];
-			if (str[i] >= 'a' && str[i] <= 'z')
+			ASCII = (int)str[i];
+			if (ASCII == (int)j)
 			{
 				str[i] = str[i] - 32;
 			}
