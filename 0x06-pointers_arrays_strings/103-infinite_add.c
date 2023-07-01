@@ -29,9 +29,13 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 	{
 		i5 = i4;
 		if (i >= 0)
+		{
 			i5 += n1[i] - '0';
+		}
 			if (i1 >= 0)
-			i5 += n2[i1] - '0';
+			{
+				i5 += n2[i1] - '0';
+			}
 		/* If this is true, it breaks out of the loop.*/
 		if (i < 0 && i1 < 0 && i5 == 0)
 		{
