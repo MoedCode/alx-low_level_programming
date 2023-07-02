@@ -45,14 +45,11 @@ char* stringRevers(char *x)
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
 	/* countera variables */
-	int i1, i2, r_;
+	int i1, i2, r_ = 0;
 	/*lengthes*/
 	int ln1 = len(n1), ln2 = len(n2);
 	/*arithmetic variables sones ones sum ctens to carry tens*/
 	int sones = 0, ctens = 0;
-
-	/*add carred tens to sumation of ones*/
-	sones = ctens;
 
 	/*not Exceed size_r*/
 	if (size_r < ln1 || size_r < ln2)
@@ -60,6 +57,9 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 		return (0);
 	}
 	for (i1 = ln1 - 1, i2 = ln2 - 1; r_ < size_r - 1; i1--, i2--)
+	/*add carred tens to sumation of ones*/
+        sones = ctens;
+
 	{
 		if(i1 >= 0)
 		{
