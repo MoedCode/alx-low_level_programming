@@ -57,21 +57,21 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 		return (0);
 	}
 	for (i1 = ln1 - 1, i2 = ln2 - 1; r_ < size_r - 1; i1--, i2--)
-	/*add carred tens to sumation of ones*/
-        sones = ctens;
-
 	{
+		/*add carred tens to sumation of ones*/
+		sones = ctens;
 		if(i1 >= 0)
 		{
 			sones += n1[i1] - '0';
 		}
 		if(i2 >= 0)
 		{
-			 sones += n2[i2] - '0';
+		sones += n2[i2] - '0';
 		}
 		/*if ctens, i1 and i2 ==0 its done*/
 		if (i1 < 0 && i2 < 0 && ctens == 0 )
 		{
+			/* move the break statement inside the loop */
 			break;
 		}
 		/*seprate tens abd ones*/
@@ -80,7 +80,7 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 		ctens = sones / 10;
 		/*increminting r dash to add to next index in r */
 		r_++;
-	}
+	}	
 	if (i1 >= 0 || i2 >= 0 || ctens != 0)
 	{
 		return (0);
