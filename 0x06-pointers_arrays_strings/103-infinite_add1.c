@@ -47,7 +47,7 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 	/* countera variables */
 	int i1, i2, r_;
 	/*lengthes*/
-	int ln1 = len(n1) - 1, ln2 = len(n2) - 1;
+	int ln1 = len(n1), ln2 = len(n2);
 	/*arithmetic variables sones ones sum ctens to carry tens*/
 	int sones = 0, ctens = 0;
 
@@ -59,7 +59,7 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 	{
 		return (0);
 	}
-	for (i1 = ln1, i2 = ln2 ; r_ < size_r - 1; i1--, i2--)
+	for (i1 = ln1 - 1, i2 = ln2 - 1; r_ < size_r - 1; i1--, i2--)
 	{
 		if(i1 >= 0)
 		{
