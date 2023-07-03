@@ -6,6 +6,11 @@
  */
 char *_strchr(char *s, char c)
 {
+	int i = 0;
+
+	while (s[i] != '\0')
+		i++;
+
 	while (*s != '\0')
 	{
 		if (*s == c)
@@ -14,9 +19,12 @@ char *_strchr(char *s, char c)
 		}
 		s++;
 	}
-	if (*s == '\0')
+
+	/*s will point '\0' if c = '\0' */
+	if (c == '\0')
 	{
 		return (s);
 	}
+
 	return (NULL);
 }
