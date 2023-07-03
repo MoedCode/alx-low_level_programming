@@ -1,6 +1,5 @@
 /**
  * _memcpy - coppy a destnation string to source
- * @dest: destination string
  * @src: source string
  * @n: the length of copied string
  * Return: dest
