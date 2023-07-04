@@ -1,13 +1,11 @@
 #include <stddef.h>
-
 /**
- * _strstr - function that search for a string in another string
- *
- * parameters:
- * @haystack: A string pointer to search in .
- * @needle: A string pointer fond charcer.
- * Return: A needle pointer or  null
+ * _strstr - looks for a string parmeter in another
+ * @string_to_search: string to searched in "haystack"
+ * @substring_to_find: string to look for "needle"
+ * Return: A substring_to_find "needle" pointer or return null
  */
+
 char *_strstr(char *string_to_search, char *substring_to_find)
 {
 	if (*substring_to_find == '\0')
@@ -28,5 +26,4 @@ char *_strstr(char *string_to_search, char *substring_to_find)
 	}
 	return (NULL);
 }
-
 
