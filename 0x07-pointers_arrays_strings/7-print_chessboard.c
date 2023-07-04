@@ -6,20 +6,18 @@
  *
  * Return: void
  */
-#include"main.h"
-
-void print_chessboard(char (*board)[8])
+void print_chessboard(char (*a)[8])
 {
-	int row, column;
 
-	for (row = 0; row < 8; row++)
+	int I, i;
+
+	for (I = 0; I < 8; I++)
 	{
-		for (column = 0; column < 8; column++)
+		for (i = 0; i < 8; i++)
 		{
-			_putchar(board[row][column]);
+			_putchar(a[I][i]);
 		}
 		_putchar('\n');
 	}
+			_putchar('\n');
 }
-
-
