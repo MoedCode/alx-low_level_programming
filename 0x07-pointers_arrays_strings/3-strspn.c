@@ -14,7 +14,7 @@ int len(char *str)
 	return (i);
 }
 /**
- * _strspn Returns the number of bytes in the initial segment
+ * _strspn - Returns the number of bytes in the initial segment
  * of s which consist only of bytes from accept
  *
  * parameters:
