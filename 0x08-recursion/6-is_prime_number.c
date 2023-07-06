@@ -19,6 +19,11 @@ int isPrime(int n, int n_)
 	}
 	return (isPrime(n_ + 1, n));
 }
+/**
+ * is_prime_number - Checks fif  number is a prime
+ * @n: int to be checked 
+ * Return: (1) if  prime, (0) if not
+ */
 int is_prime_number(int n)
 {
 	int n_ = 1;
