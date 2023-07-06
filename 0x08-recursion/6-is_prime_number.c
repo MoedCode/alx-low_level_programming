@@ -21,7 +21,7 @@ int isPrime(int n, int n_)
 }
 /**
  * is_prime_number - Checks fif  number is a prime
- * @n: int to be checked 
+ * @n: int to be checked
  * Return: (1) if  prime, (0) if not
  */
 int is_prime_number(int n)
