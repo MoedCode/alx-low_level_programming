@@ -12,8 +12,7 @@ int isPrime(int n, int n_)
 	{
 		return (1);
 	}
-	if (n % n_ == 0 && n_ != 1 &&
-		n_ != n && n_ <= n )
+	if (n % n_ == 0 && n_ != 1 && n_ != n && n_ <= n)
 	{
 
 		return (0);
