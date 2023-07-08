@@ -8,12 +8,14 @@
  */
 int main(int argc, char *argv[])
 {
-	//indecate falier 
-		if (argv[0] == 0)
-					return (1);
-//+48 cinvert to numrical for number as string
-			_putchar((argc - 1) + 48);
-				_putchar('\n');
-					return (0);
+	/*indecate falier*/
+	if (argv[0] == 0)
+	{
+		return (1);
+	}
+/*+48 cinvert to numrical for number as string*/
+	_putchar((argc - 1) + 48);
+	_putchar('\n');
+	return (0);
 }
 
