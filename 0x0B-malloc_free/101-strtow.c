@@ -27,7 +27,7 @@ int wordCount(char *str)
 /**
  * strtow  - splits a string into words.
  * @str: string to split
- * Return char** after split (NULL) in failer
+ * Return: char** after split (NULL) in failer
  */
 char **strtow(char *str)
 {
