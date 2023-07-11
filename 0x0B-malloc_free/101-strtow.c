@@ -9,14 +9,12 @@
 
 int wordCount(char *str)
 {
-	int words, tmp1;
-
+	int words;
 	int chars = words = 0;
 
 	for (; str[chars] != '\0'; chars++)
 	{
-		tmp1 = chars + 1;
-		if (str[chars] != ' ' &&  str[tmp1] == ' ')
+		if ((str[chars] != ' ' &&  str[chars + 1] == ' ') || (str[chars + 1] == '\0'))
 		{
 			words++;
 		}
@@ -63,3 +61,4 @@ char **strtow(char *str)
 	words[j] = NULL;
 	return (words);
 }
+
