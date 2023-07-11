@@ -9,26 +9,17 @@
 
 int wordCount(char *str)
 {
-	int words, wrTerm = 0;
+	int words, tmp1;
 
-	int chars = 0;
+	int chars = words = 0;
 
 	for (; str[chars] != '\0'; chars++)
 	{
-		if (str[chars] != ' ')
-		{
-			wrTerm = 1;
-		}
-		else if (wrTerm)
+		tmp1 = chars +1;
+		if (str[chars] != ' '&&  str[tmp1 ] == ' ')
 		{
 			words++;
-			wrTerm = 0;
 		}
-	}
-
-	if (wrTerm)
-	{
-		words++;
 	}
 
 	return (words);
