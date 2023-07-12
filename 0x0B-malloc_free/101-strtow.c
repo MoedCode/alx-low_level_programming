@@ -56,7 +56,7 @@ char **strtow(char *str)
 	wNum = wordCount(str);
 	if (wNum == 0)
 		return (NULL);
-	words = malloc((wNum + 1) * sizeof(char *));
+	words = malloc((wNum) * sizeof(char *));
 	if (words == NULL || wNum == 0)
 	{
 		free(words);
