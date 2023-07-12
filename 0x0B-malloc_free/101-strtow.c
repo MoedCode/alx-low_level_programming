@@ -9,18 +9,37 @@
 
 int wordCount(char *str)
 {
-	int words;
-	int chars = words = 0;
+	int words, chars;
 
-	for (; str[chars] != '\0'; chars++)
+for (chars = words = 0; str[chars] != '\0'; chars++)
+{
+
+	if ((str[chars] != ' ' &&  str[chars + 1] == ' ') || (str[chars + 1] == '\0'))
 	{
-		if ((str[chars] != ' ' &&  str[chars + 1] == ' ') || (str[chars + 1] == '\0'))
-		{
-			words++;
-		}
+		words++;
 	}
+}
 
-	return (words);
+	return (words - 1);
+}
+/**
+ * free_grid- free allocated memory fro  2d arry.
+ *
+ * @grid: pointer to allocated memory
+ * @height: te pointer of  hight,
+ *
+ * Return: void
+ */
+
+void free_grid(char **grid, int height)
+{
+	if (grid != NULL && height != 0)
+	{
+		for (; height > 0; height--)
+			free(grid[height]);
+		free(grid[height]);
+		free(grid);
+	}
 }
 /**
  * strtow  - splits a string into words.
@@ -29,36 +48,42 @@ int wordCount(char *str)
  */
 char **strtow(char *str)
 {
-	int wNum;
+	int wNum, i, j, b, c;
 	char **words;
-	int i, j, k, ln, first, end;
 
 	if (str == NULL || str[0] == '\0')
 		return (NULL);
 	wNum = wordCount(str);
+	printf("wNum = %i\n", wNum);
 	if (wNum == 0)
 		return (NULL);
-	words = malloc((wNum) * sizeof(char *));
-	if (words == NULL)
-		return (NULL);
-	for (i = 0, j = 0; str[i] != '\0';)
+	words = malloc((wNum + 1) * sizeof(char *));
+	if (words == NULL || wNum == 0)
 	{
-		while (str[i] == ' ')
-			i++;
-		first = i;
-		while (str[i] != ' ' && str[i] != '\0')
-			i++;
-		end = i;
-		ln = end - first;
-		words[j] = malloc((ln + 1) * sizeof(char));
-		if (words[j] == NULL)
-			return (NULL);
-		for (k = 0; k < ln; k++)
-			words[j][k] = str[first + k];
-		words[j][k] = '\0';
-		j++;
+		free(words);
+		return (NULL);
 	}
-	words[j] = NULL;
+	for (i = b = 0; i < wNum; i++)
+	{
+		for (c = b; str[c] != '\0'; c++)
+		{
+			if (str[c] == ' ')
+				b++;
+			if (str[c] != ' ' && (str[c + 1] == ' ' || str[c + 1] == '\0'))
+			{
+				words[i] = malloc((c - b + 2) * sizeof(char));
+				if (words[i] == NULL)
+				{
+					free_grid(words, i);
+					return (NULL);
+				}
+				break;
+			}
+		}
+		for (j = 0; b <= c; b++, j++)
+			words[i][j] = str[b];
+		words[i][j] = '\0';
+	}
+	words[i] = NULL;
 	return (words);
 }
-
