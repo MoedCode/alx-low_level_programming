@@ -54,7 +54,6 @@ char **strtow(char *str)
 	if (str == NULL || str[0] == '\0')
 		return (NULL);
 	wNum = wordCount(str);
-	printf("wNum = %i\n", wNum);
 	if (wNum == 0)
 		return (NULL);
 	words = malloc((wNum + 1) * sizeof(char *));
