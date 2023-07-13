@@ -2,7 +2,7 @@
 
 /**
  * malloc_checked - allocate memorry using malloc
- * @add: a pointer to the allocated memory
+ * @b: the size to be allocated by malloc
  * Return: (add) on sccess, exut with (98) on failer
  */
 void *malloc_checked(unsigned int b)
@@ -11,7 +11,7 @@ void *malloc_checked(unsigned int b)
 
 	if (add == NULL)
 	{
-		exit (98);
+		exit(98);
 
 	}
 	return (add);
