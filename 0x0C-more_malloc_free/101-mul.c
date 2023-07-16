@@ -32,17 +32,11 @@ char* lmitlessMul(char* buff0, char* buff1)
 	ln0 = _strlen(buff0);
 	ln1 = _strlen(buff1);
 	ln2 = ln0 + ln1 + 1;
-
 	buff = (char*) calloc(ln2, sizeof(char));
-	if (buff == NULL) {
-		printf("FAILED TO ALLOCATE BUFFER\n");
+	if (buff == NULL)
 		return buff;
-	}
-
-	for (i0 = 0; i0 < ln2; i0++) {
+	for (i0 = 0; i0 < ln2; i0++)
 		buff[i0] = '0';
-	}
-
 	for (i0 = ln0 - 1; i0 >= 0; i0--) {
 		int num1 = 0;
 
@@ -54,12 +48,10 @@ char* lmitlessMul(char* buff0, char* buff1)
 
 			num2 = buff1[i1] - '0';
 			 ones = 0;
-
 			ones =  num1 * num2 + (buff[i0 + i1 + 1] - '0') + carry;
 			buff[i0 + i1 + 1] = (ones % 10) + '0';
 			carry = ones / 10;
 		}
-
 		buff[i0 + i1 + 1] = carry + '0';
 	}
 
