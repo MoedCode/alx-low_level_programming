@@ -1,7 +1,7 @@
 #include <stdio.h>
 /**
- * main - Entry point __FILE__ prints file name
- * Return: (0) in all cases
+ * main - Entry point  prints file name
+ * Return: (0) always
  */
 int main(void)
 {
