@@ -4,7 +4,7 @@
  *
  * @s:char* to recive arithmetic operators
  *
- * Rreturn (fun_otr)if s is arithmetic operators
+ * Return: (fun_otr)if s is arithmetic operators
  *(NULL) any thing else
  */
 int (*get_op_func(char *s))(int, int)
