@@ -4,13 +4,13 @@
  * main - Entry point
  *
  *@argc: argv[] length
- *@argv: char* array of nputs 
+ *@argv: char* array of nputs
  *
  * Return: (0) on success
  */
 int main(int argc, char *argv[])
 {
-	int i , n;
+	int i, n;
 
 	if (argc != 2)
 	{
