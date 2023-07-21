@@ -13,7 +13,7 @@
  * @specifier: (key) format specifier
  * @pointer: (value)function pointer
  */
- typedef struct fomatSpecifiersStruct
+typedef struct fomatSpecifiersStruct
 {
 	char *specifier;
 	void (*pointer)(va_list);

@@ -41,6 +41,7 @@ void _char(va_list args)
 void _string(va_list args)
 {
 	char *string = va_arg(args, char *);
+
 	if (string == NULL)
 	{
 		printf("(nil)");
@@ -58,7 +59,7 @@ void _string(va_list args)
 
 void print_all(const char *const format, ...)
 {
-	size_t formatCount , fomStructCount;
+	size_t formatCount, fomStructCount;
 	char *separator = "";
 	va_list args;
 
