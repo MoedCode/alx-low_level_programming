@@ -12,7 +12,7 @@ void print_all(const char * const format, ...)
 {
 	size_t i = 0, j, caseMode = 0;
 	char *S;
-	const char *typSpBuff = "cifs";
+	const char typSpBuff[] = "cifs";
 	va_list args;
 
 
