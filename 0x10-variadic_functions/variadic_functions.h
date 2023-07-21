@@ -6,6 +6,18 @@
 #include <stddef.h>
 #include<stdio.h>
 #include<string.h>
+/* STRUCTS */
+/**
+ * struct fomatSpecifiersStruct - key format specifier
+ *vlaue function pointer
+ * @specifier: (key) format specifier
+ * @pointer: (value)function pointer
+ */
+ typedef struct fomatSpecifiersStruct
+{
+	char *specifier;
+	void (*pointer)(va_list);
+} FSS;
 
 /* Prototypes */
 int sum_them_all(const unsigned int n, ...);

@@ -1,54 +1,93 @@
-#include <stdarg.h>
 #include "variadic_functions.h"
 #include <stdio.h>
+#include <stdarg.h>
 
 /**
- * print_all -  function that prints anything.
- * @format: a list of type spicifers.
- *@..: arguments
- * Return: (void).
+ * _int : peint int
+ * @args: int arg
+ * Return: (void)
  */
-void print_all(const char * const format, ...)
+
+void _int(va_list args)
 {
-	size_t i = 0, j, caseMode = 0;
-	char *S;
-	const char typSpBuff[] = "cifs";
+	printf("%i", va_arg(args, int));
+}
+/**
+ * _float : peint int
+ * @args: floatt arg
+ * Return: (void)
+ */
+
+void _float(va_list args)
+{
+	printf("%f", va_arg(args, double));
+}
+/**
+ * _char : peint char
+ * @args: char arg
+ * Return: (void)
+ */
+
+void _char(va_list args)
+{
+	printf("%c", va_arg(args, int));
+}
+/**
+ * _string : peint string
+ * @args: string arg
+ * Return: (void)
+ */
+
+void _string(va_list args)
+{
+	char *string = va_arg(args, char *);
+	if (string == NULL)
+	{
+		printf("(nil)");
+		return;
+	}
+	printf("%s", string);
+}
+
+/**
+ * print_all - prints anything.
+ * @format: a list of types of arguments passed to the function.
+ *
+ * Return: no return.
+ */
+
+void print_all(const char *const format, ...)
+{
+	size_t formatCount , fomStructCount;
+	char *separator = "";
 	va_list args;
 
 
+	FSS fss[] = {
+		{"i", _int},
+		{"f", _float},
+		{"c", _char},
+		{"s", _string},
+	};
+
 	va_start(args, format);
-	for (i = 0; format && format[i]; i++)
+	formatCount = 0;
+	while (format && format[formatCount])
 	{
-		j = 0;
-		while (typSpBuff[j])
+		fomStructCount = 0;
+		while (fomStructCount < 4)
 		{
-			if (format[i] == typSpBuff[j] && caseMode)
+			if (fss[fomStructCount].specifier[0] == format[formatCount])
 			{
-				printf(", ");
+				printf("%s", separator);
+				separator = ", ";
+				fss[fomStructCount].pointer(args);
 				break;
-			} j++;
+			}
+			fomStructCount++;
 		}
-		switch (format[i])
-		{
-			case 'c':
-				printf("%c", va_arg(args, int)), caseMode = 1;
-				break;
-			case 'i':
-				printf("%d", va_arg(args, int)), caseMode = 1;
-				break;
-			case 'f':
-				printf("%f", va_arg(args, double)), caseMode = 1;
-				break;
-			case 's':
-				S = va_arg(args, char *), caseMode = 1;
-				if (!S)
-				{
-					printf("(nil)");
-					break;
-				}
-				printf("%s", S);
-				break;
-		}
+		formatCount++;
 	}
-	printf("\n"), va_end(args);
+	printf("\n");
+	va_end(args);
 }
