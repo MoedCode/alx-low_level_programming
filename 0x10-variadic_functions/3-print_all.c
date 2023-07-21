@@ -10,7 +10,7 @@
  */
 void print_all(const char * const format, ...)
 {
-	size_t i = 0, j, k, caseMode = 0;
+	size_t i = 0, j, caseMode = 0;
 	char *S,  *typSpBuff = "cifs";
 	va_list args;
 
