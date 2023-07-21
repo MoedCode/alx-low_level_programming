@@ -26,7 +26,6 @@ void print_strings(const char *separator, const unsigned int n, ...)
 		if (i < (n - 1) && separator)
 		{
 			putchar(separator[0]);
-			putchar(32);
 		}
 	}
 	va_end(args);
