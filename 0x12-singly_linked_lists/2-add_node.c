@@ -3,7 +3,7 @@
 /**
  * add_node -adds a new node at the beginning of a list_t list
  *then copy the  string in first node in linked list.
-
+ *
  *  @head: pointer to a pointer first node.
  *  @str: Tgiven  string  copy in  the new node.
  *
