@@ -15,8 +15,6 @@ size_t i = 0;
 
 tmp = (listint_t *)head;
 
-	if (!head)
-		exit(98);
 
 while (tmp)
 {
