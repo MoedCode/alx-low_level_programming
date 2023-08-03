@@ -1,88 +1,35 @@
 #include "lists.h"
-
 /**
- * looped_listint_count - frees a linked list
- * @head: head of a list.
- * Return: (void).
-*/
-size_t looped_listint_count(listint_t *head)
-{
-	listint_t *tmp, *currnt;
-	size_t cntNode = 1;
-
-	if (!head  || !head->next)
-		return (0);
-
-	tmp = head->next;
-	currnt = (head->next)->next;
-
-	while (currnt)
-	{
-		if (tmp == currnt)
-		{
-			tmp = head;
-			while (tmp != currnt)
-			{
-				cntNode++;
-				tmp = tmp->next;
-				currnt = currnt->next;
-			}
-
-			tmp = tmp->next;
-			while (tmp != currnt)
-			{
-				cntNode++;
-				tmp = tmp->next;
-			}
-
-			return (cntNode);
-		}
-
-		tmp = tmp->next;
-		currnt = (currnt->next)->next;
-	}
-
-	return (0);
-}
-
-/**
- * print_listint_safe - prints a listint_t linked list
- * @head: pointer to first node
- * Return: (size_t) number of cntNode in the list
+ * free_listint_safe -  frees a listint_t list.
+ * @h: pointer to pointer of the head node.
+ * Return: (size_t) number of freed list nodes
  */
-
 size_t free_listint_safe(listint_t **h)
 {
+	size_t list_len = 0;
+
 	listint_t *tmp;
-	size_t cntNode, currnt;
 
-	cntNode = looped_listint_count(*h);
+	tmp = *h;
 
-	if (!cntNode)
+	while (tmp != NULL)
 	{
-		for (; h != NULL && *h != NULL; cntNode++)
+		listint_t *next = tmp->next;
+
+		if (tmp > next)
 		{
-			tmp = (*h)->next;
-			free(*h);
-			*h = tmp;
+			free(tmp);
+			tmp = next;
+			list_len++;
+		}
+		else
+		{
+			free(tmp);
+			list_len++;
+			break;
 		}
 	}
-
-	else
-	{
-		for (currnt = 0; currnt < cntNode; currnt++)
-		{
-			tmp = (*h)->next;
-			free(*h);
-			*h = tmp;
-		}
-
-		*h = NULL;
-	}
-
-	h = NULL;
-
-	return (cntNode);
+	*h = NULL;
+	return (list_len);
 }
-
 
