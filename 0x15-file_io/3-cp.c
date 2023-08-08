@@ -15,7 +15,7 @@ char *strAlloc(char *file)
 {
 	char *str;
 
-	str = malloc(sizeof(char) * 2048);
+	str = malloc(sizeof(char) * 1024);
 
 	if (str == NULL)
 	{
@@ -50,11 +50,7 @@ void clodeF(int desc)
  * @argc: argv length.
  *
  * Return: (0) on success.
- *  - exit code:
- * (97)incorrect  argument count.
- * (98)not exist file_from or it cannot be read.
- * (99) cannot  creat file  file_to cannot be  written.
- *  (100) cannot close file_to or file_from
+
  */
 int main(int argc, char *argv[])
 {
