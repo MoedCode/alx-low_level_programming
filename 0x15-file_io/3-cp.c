@@ -15,7 +15,7 @@ char *strAlloc(char *file)
 {
 	char *str;
 
-	str = malloc(sizeof(char) * 1024);
+	str = malloc(sizeof(char) * 2048);
 
 	if (str == NULL)
 	{
