@@ -1,102 +1,105 @@
-#include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include "main.h"
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 
-char *strAlloc(char *file);
-void clodeF(int desc);
 
-/**
- * strAlloc - creat allocate block for  string .
- * @file: The name of the file str is storing chars for.
- *
- * Return: A pointer to the newly-allocated str.
- */
-char *strAlloc(char *file)
-{
-	char *str;
-
-	str = malloc(sizeof(char) * 2048);
-
-	if (str == NULL)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
-
-		exit(99);
-	}
-
-	return (str);
-}
 
 /**
- * clodeF - Closes file.
- * @desc:file descriptor
+ * openF - check statuse given files.
+ * @argv: pointer to main argv "main argument array".
+ * @argc: arg v lengtht.
+ * @file_from: pointer to the source file.
+ * @file_to: A pointer to   descriptor file.
+ * Return: (void).
  */
-void clodeF(int desc)
+void openF(int argc, char **argv, int *file_from, int *file_to)
 {
-	int status;
-
-	status = close(desc);
-
-	if (status == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close desc %d\n", desc);
-		exit(100);
-	}
-}
-
-/**
- * main - program Entry point, copy file tio another
- * @argv:array of argument passed to porogram.
- * @argc: argv length.
- *
- * Return: (0) on success.
- *  - exit code:
- * (97)incorrect  argument count.
- * (98)not exist file_from or it cannot be read.
- * (99) cannot  creat file  file_to cannot be  written.
- *  (100) cannot close file_to or file_from
- */
-int main(int argc, char *argv[])
-{
-	int SourseS, destSt, readSt, writeSt;
-	char *str;
-
 	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 
-	str = strAlloc(argv[2]);
-	SourseS = open(argv[1], O_RDONLY);
-	readSt = read(SourseS, str, 1024);
-	destSt = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	*file_from = open(argv[1], O_RDONLY, 0);
 
-	do {
-		if (SourseS == -1 || readSt == -1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-			free(str);
-			exit(98);
-		}
+	if (*file_from == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
+	}
 
-		writeSt = write(destSt, str, readSt);
-		if (destSt == -1 || writeSt == -1)
+	*file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+
+	if (*file_to == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		close(*file_from);
+		exit(99);
+	}
+}
+
+/**
+ * copyF - copy files main work done here
+ *
+ * @file_from: pointer to source file.
+ * @file_to: pointer to destnation file.
+ * @argv: The argument vector.
+ *
+ * Return: (void).
+ */
+void copyF(int file_from, int file_to, char **argv)
+{
+	int readS, writeS;
+	char buff[1024];
+
+	while ((readS = read(file_from, buff, 1024)) > 0)
+	{
+		writeS = write(file_to, buff, readS);
+
+		if (writeS != readS)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			free(str);
+			close(file_from);
+			close(file_to);
 			exit(99);
 		}
+	}
+	if (readS == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		close(file_from);
+		if (file_to != -1)
+			close(file_to);
+		exit(98);
+	}
 
-		readSt = read(SourseS, str, 1024);
-		destSt = open(argv[2], O_WRONLY | O_APPEND);
+	if (close(file_from) == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %i\n", file_from);
+		exit(100);
+	}
+	if (close(file_to) == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %i\n", file_to);
+		exit(100);
+	}
+}
 
-	} while (readSt > 0);
+/**
+ * main -  program Entry point.
+ * @argv:  to main argv "main argument array".
+ * @argc: arg v lengtht.
+ * Return: 0 on success,
+ * other values on error (from openF or copyF).
+ */
+int main(int argc, char **argv)
+{
+	int file_to, file_from;
 
-	free(str);
-	clodeF(SourseS);
-	clodeF(destSt);
-
+	openF(argc, argv, &file_from, &file_to);
+	copyF(file_from, file_to, argv);
 
 	return (0);
 }
