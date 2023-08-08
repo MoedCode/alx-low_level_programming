@@ -8,7 +8,7 @@
  *
  * @filename: name of the file to red
  * @letters: maximum number of lettters that will be read
- * @return(ssize_t)number of lettters that will be read
+ * Return: (ssize_t)number of lettters that will be read
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 
