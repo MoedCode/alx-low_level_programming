@@ -19,7 +19,7 @@ char *strAlloc(char *file)
 
 	if (str == NULL)
 	{
-		dprintf(STDERR_FILENO,"Error: Can't write to %s\n", file);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file);
 
 		exit(99);
 	}
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 	do {
 		if (SourseS == -1 || readSt == -1)
 		{
-			dprintf(STDERR_FILENO,"Error: Can't read from file %s\n", argv[1]);
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 			free(str);
 			exit(98);
 		}
@@ -83,8 +83,7 @@ int main(int argc, char *argv[])
 		writeSt = write(destSt, str, readSt);
 		if (destSt == -1 || writeSt == -1)
 		{
-			dprintf(STDERR_FILENO,
-				"Error: Can't write to %s\n", argv[2]);
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 			free(str);
 			exit(99);
 		}
