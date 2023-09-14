@@ -13,6 +13,8 @@ int sum_dlistint(dlistint_t *head)
 	size_t i;
 	dlistint_t *H = head;
 
+	if (!head)
+		return (0);
 	for (i = 0; H; i++, H = H->next)
 	{
 		sum += H->n;
