@@ -1,6 +1,6 @@
 #include "lists.h"
 /**
- *print_dlistint - return  singaly list length
+ *dlistint_len - return  singaly list length
  * @h: pointer to first node
  * Return: size_t i whics number of  nodes
  */
