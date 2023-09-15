@@ -2,6 +2,25 @@
 #include <stdlib.h>
 
 /**
+ * Add_Head -  adds a new node
+ * with null previous and next filelds
+ * @H: a null pointer to an empty list
+ * @n: element to be added in the linked list as the new head
+ * Return: the address of the new element, or NULL if it failed
+ */
+dlistint_t *Add_Head(dlistint_t **H, int n)
+{
+	dlistint_t *N = malloc(sizeof(dlistint_t));
+
+	if (!N)
+		return (NULL);
+	N->n = n;
+	N->next = NULL;
+	N->prev = NULL;
+	*H = N;
+	return (N);
+}
+/**
  * add_dnodeint_end -  adds a new node at the  end  of
  *a dlistint_t list.
  *
