@@ -1,42 +1,69 @@
 #include "lists.h"
+#include <stddef.h>
 
 /**
- * delete_dnodeint_at_index - Deletes a node from a dlistint_t
- *                            at a given index.
- * @head: A pointer to the head of the dlistint_t.
- * @index: The index of the node to delete.
+ * delete_dnodeint_at_index - delet a  node at a given position
  *
- * Return: Upon success - 1.
- *         Otherwise - -1.
+ * @head:double pointer to Hrad node
+ * @index: the given position
+ * Return:(-1) if cant delet node , else (1)
  */
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-	dlistint_t *tmp = *head;
+
+	size_t i = 0;
+	dlistint_t *H = *head, *tmpH;
 
 	if (*head == NULL)
 		return (-1);
 
-	for (; index != 0; index--)
+	if (index == 0)
 	{
-		if (tmp == NULL)
-			return (-1);
-		tmp = tmp->next;
+		/* in all cases make list pointer point node1*/
+		(*head)  = H->next;
+		/*split node0 from list*/
+		H->prev = NULL;
+		/* if index=0 and list lenth > 1*/
+		if (H->next)
+		{
+			/* node 0 will be deletd so   node1 ▶ node 0*/
+			/* make node1 prev = NULL */
+			H->next->prev = NULL;
+		}
+			/* deleting node 0*/
+			free(H);
+		return 1;
 	}
 
-	if (tmp == *head)
+	for (; H; H = H->next, i++)
 	{
-		*head = tmp->next;
-		if (*head != NULL)
-			(*head)->prev = NULL;
-	}
 
-	else
-	{
-		tmp->prev->next = tmp->next;
-		if (tmp->next != NULL)
-			tmp->next->prev = tmp->prev;
-	}
+		if ((H->next == NULL) && (i == index))
+		{
 
-	free(tmp);
-	return (1);
+			// tmpH = H;
+			H->prev->next = NULL;
+			free(H);
+
+			return 1;
+
+			/*
+			[   ]
+			|
+			[   ]
+			*/
+		}
+
+		if (i == index)
+		{
+
+			tmpH = H;
+
+			H->prev->next = H->next;
+			H->next->prev = H->prev;
+			free(tmpH);
+			return (1);
+		}
+	}
+	return -1;
 }
