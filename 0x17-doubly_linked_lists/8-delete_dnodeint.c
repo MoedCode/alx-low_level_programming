@@ -8,6 +8,8 @@
  * @index: the given position
  * Return:(-1) if cant delet node , else (1)
  */
+int delete_dnodeint_at_index(dlistint_t **head, unsigned int index);
+
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
 
@@ -32,7 +34,7 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 		}
 			/* deleting node 0*/
 			free(H);
-		return 1;
+		return (1);
 	}
 
 	for (; H; H = H->next, i++)
@@ -40,23 +42,14 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 
 		if ((H->next == NULL) && (i == index))
 		{
-
 			/* tmpH = H; */
 			H->prev->next = NULL;
 			free(H);
-
-			return 1;
-
-			/*
-			[   ]
-			|
-			[   ]
-			*/
+			return (1);
 		}
 
 		if (i == index)
 		{
-
 			tmpH = H;
 
 			H->prev->next = H->next;
@@ -65,5 +58,5 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 			return (1);
 		}
 	}
-	return -1;
+	return (-1);
 }
