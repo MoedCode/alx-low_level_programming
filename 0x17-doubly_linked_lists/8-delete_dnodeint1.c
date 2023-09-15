@@ -15,14 +15,23 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 	dlistint_t *H = *head, *tmpH;
 
 	if (*head == NULL)
-		return 1;
+		return (-1);
 
 	if (index == 0)
 	{
-		tmpH = H;
+		/* in all cases make list pointer point node1*/
+		(*head)  = H->next;
+		/*split node0 from list*/
 		H->prev = NULL;
-		*head = H->next;
-		free(tmpH);
+		/* if index=0 and list lenth > 1*/
+		if (H->next)
+		{
+			/* node 0 will be deletd so   node1 ▶ node 0*/
+			/* make node1 prev = NULL */
+			H->next->prev = NULL;
+		}
+			/* deleting node 0*/
+			free(H);
 		return 1;
 	}
 
@@ -32,11 +41,17 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 		if ((H->next == NULL) && (i == index))
 		{
 
-			tmpH = H;
+			// tmpH = H;
 			H->prev->next = NULL;
-			free(tmpH);
+			free(H);
 
 			return 1;
+
+			/*
+			[   ]
+			|
+			[   ]
+			*/
 		}
 
 		if (i == index)
