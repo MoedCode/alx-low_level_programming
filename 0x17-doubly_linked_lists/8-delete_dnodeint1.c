@@ -14,7 +14,7 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 	dlistint_t *H = *head, *tmpH;
 
 	if (*head == NULL)
-		return -1;
+		return index == 0 ? 1 : -1;
 
 	if (index == 0)
 	{
@@ -37,7 +37,7 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 			return 1;
 		}
 		if (H->next == NULL && i < index)
-			return -1;  // index is greater than the length of the list
+			return -1;
 
 		H = H->next;
 		i++;
