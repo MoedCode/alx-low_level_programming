@@ -36,6 +36,9 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 			free(tmpH);
 			return 1;
 		}
+		if (H->next == NULL && i < index)
+			return -1;  // index is greater than the length of the list
+
 		H = H->next;
 		i++;
 	}
