@@ -1,69 +1,40 @@
 #include "lists.h"
-#include <stddef.h>
+#include <stdlib.h>
 
 /**
- * delete_dnodeint_at_index - delet a  node at a given position
+ * delete_dnodeint_at_index - deletes a node at a specific index
+ * @head: double pointer to the linked list
+ * @index: index at which to delete node
  *
- * @head:double pointer to Hrad node
- * @index: the given position
- * Return:(-1) if cant delet node , else (1)
+ * Return: 1 on success, -1 on failure
  */
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
+	dlistint_t *current;
+	unsigned int i;
 
-	size_t i = 0;
-	dlistint_t *H = *head, *tmpH;
-
-	if (*head == NULL)
+	if (head == NULL || *head == NULL)
 		return (-1);
-
+	current = *head;
 	if (index == 0)
 	{
-		/* in all cases make list pointer point node1*/
-		(*head)  = H->next;
-		/*split node0 from list*/
-		H->prev = NULL;
-		/* if index=0 and list lenth > 1*/
-		if (H->next)
+		*head = current->next;
+		if (current->next != NULL)
 		{
-			/* node 0 will be deletd so   node1 ▶ node 0*/
-			/* make node1 prev = NULL */
-			H->next->prev = NULL;
+			current->next->prev = NULL;
 		}
-			/* deleting node 0*/
-			free(H);
-		return 1;
+		free(current);
+		return (1);
 	}
-
-	for (; H; H = H->next, i++)
+	for (i = 0; i < index; i++)
 	{
-
-		if ((H->next == NULL) && (i == index))
-		{
-
-			// tmpH = H;
-			H->prev->next = NULL;
-			free(H);
-
-			return 1;
-
-			/*
-			[   ]
-			|
-			[   ]
-			*/
-		}
-
-		if (i == index)
-		{
-
-			tmpH = H;
-
-			H->prev->next = H->next;
-			H->next->prev = H->prev;
-			free(tmpH);
-			return (1);
-		}
+		if (current->next == NULL)
+			return (-1);
+		current = current->next;
 	}
-	return -1;
+	current->prev->next = current->next;
+	if (current->next != NULL)
+		current->next->prev = current->prev;
+	free(current);
+	return (1);
 }
