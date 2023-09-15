@@ -28,10 +28,11 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 			if (!midNode)
 				return (NULL);
 			midNode->n = n;
-			midNode->next = H->next;
+			midNode->next = H;
 			midNode->prev = H->prev;
-			H->prev = H->prev->prev;
-			H->next = midNode;
+
+			H->prev->next = midNode;
+			H->prev = midNode;
 			return (midNode);
 		}
 
