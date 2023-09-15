@@ -1,69 +1,47 @@
 #include "lists.h"
-#include <stddef.h>
-
 /**
- * delete_dnodeint_at_index - delet a  node at a given position
+ * delete_dnodeint_at_index - function that deletes the node
+ * at index index of a dlistint_t linked list.
+ * @head: pointer to a linked listed to be deleted
+ * @index: the index to be deleted
  *
- * @head:double pointer to Hrad node
- * @index: the given position
- * Return:(-1) if cant delet node , else (1)
+ * Return: Returns: 1 if it succeeded, -1 if it failed
  */
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-
-	size_t i = 0;
-	dlistint_t *H = *head, *tmpH;
+	dlistint_t *curr = *head;
+	unsigned int i = 0;
 
 	if (*head == NULL)
-		return (-1);
+		return (-1); /* Return -1 for an empty list.*/
 
+	/* Handling the case of deleting the first node (index = 0).*/
 	if (index == 0)
 	{
-		/* in all cases make list pointer point node1*/
-		(*head)  = H->next;
-		/*split node0 from list*/
-		H->prev = NULL;
-		/* if index=0 and list lenth > 1*/
-		if (H->next)
+		*head = curr->next; /* Update the head.*/
+		if (curr->next != NULL)
 		{
-			/* node 0 will be deletd so   node1 ▶ node 0*/
-			/* make node1 prev = NULL */
-			H->next->prev = NULL;
+			curr->next->prev = NULL;
 		}
-			/* deleting node 0*/
-			free(H);
-		return 1;
+		free(curr); /* Free the memory of the old head.*/
+		return (1); /* Return 0 for success.*/
 	}
 
-	for (; H; H = H->next, i++)
+	while (curr != NULL)
 	{
-
-		if ((H->next == NULL) && (i == index))
-		{
-
-			// tmpH = H;
-			H->prev->next = NULL;
-			free(H);
-
-			return 1;
-
-			/*
-			[   ]
-			|
-			[   ]
-			*/
-		}
-
 		if (i == index)
 		{
+			curr->prev->next = curr->next;
 
-			tmpH = H;
+			if (curr->next != NULL)
+				curr->next->prev = curr->prev;
 
-			H->prev->next = H->next;
-			H->next->prev = H->prev;
-			free(tmpH);
-			return (1);
+			free(curr); /* Free the memory of the deleted node.*/
+			return (1); /* Return 0 for success.*/
 		}
+		curr = curr->next;
+		i++;
 	}
-	return -1;
+
+	return (-1); /* Index is out of bounds.*/
 }
