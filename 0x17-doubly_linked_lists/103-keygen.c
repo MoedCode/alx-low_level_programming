@@ -15,8 +15,7 @@
 int main(int argc, char *argv[]);
 int main(int argc, char *argv[])
 {
-	unsigned int i, temp;
-	size_t len, sum;
+	size_t len, sum, i, temp;
 	char KEY[7] = "      ",
 	 *CHARS = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
 
