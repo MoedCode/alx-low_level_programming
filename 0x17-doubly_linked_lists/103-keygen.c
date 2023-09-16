@@ -13,7 +13,7 @@
  */
 int main(int argc, char *argv[])
 {
-	unsigned int i, b;
+	unsigned int i, Tmp;
 	size_t len, ASCIISUM;
 	char p[7] = "      ",
 	*CAHRS = "A-CHRDw87lNS0E9B2TibgpnMVys5XzvtOGJcYLU+4mjW6fxqZeF3Qa1rPhdKIouk";
@@ -29,20 +29,20 @@ int main(int argc, char *argv[])
 	for (i = 0, ASCIISUM = 0; i < len; i++)
 		ASCIISUM += argv[1][i];
 	p[1] = CAHRS[(ASCIISUM ^ 79) & 63];
-	for (i = 0, b = 1; i < len; i++)
-		b *= argv[1][i];
-	p[2] = CAHRS[(b ^ 85) & 63];
-	for (b = argv[1][0], i = 0; i < len; i++)
-		if ((char)b <= argv[1][i])
-			b = argv[1][i];
-	srand(b ^ 14);
+	for (i = 0, Tmp = 1; i < len; i++)
+		Tmp *= argv[1][i];
+	p[2] = CAHRS[(Tmp ^ 85) & 63];
+	for (Tmp = argv[1][0], i = 0; i < len; i++)
+		if ((char)Tmp <= argv[1][i])
+			Tmp = argv[1][i];
+	srand(Tmp ^ 14);
 	p[3] = CAHRS[rand() & 63];
-	for (b = 0, i = 0; i < len; i++)
-		b += argv[1][i] * argv[1][i];
-	p[4] = CAHRS[(b ^ 239) & 63];
-	for (b = 0, i = 0; (char)i < argv[1][0]; i++)
-		b = rand();
-	p[5] = CAHRS[(b ^ 229) & 63];
+	for (Tmp = 0, i = 0; i < len; i++)
+		Tmp += argv[1][i] * argv[1][i];
+	p[4] = CAHRS[(Tmp ^ 239) & 63];
+	for (Tmp = 0, i = 0; (char)i < argv[1][0]; i++)
+		Tmp = rand();
+	p[5] = CAHRS[(Tmp ^ 229) & 63];
 	printf("%s\n", p);
 	return (0);
 }
