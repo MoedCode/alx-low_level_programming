@@ -1,20 +1,6 @@
 #include "main.h"
 
-/**
- * _strlen - returns the length of a string.
- *
- * @s: char*
- *
- * Return: string length
- */
-int _strlen(char *s)
-{
-	int ln = 0;
 
-	while (s[ln] != '\0')
-		ln++;
-	return (ln);
-}
 
 /**
  * _atoi -  string to an integer

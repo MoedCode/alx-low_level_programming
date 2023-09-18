@@ -1,18 +1,6 @@
+#include "main.h"
 #include <stdio.h>
-/**
- * len - calculates string length
- * @str:type string
- *
- * Return: length
- */
-int len(char *str)
-{
-	int i = 0;
 
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
 /**
  * _strpbrk - search in "s" about 'char' from "accept"
  * as son as it find the char return pointer to it
@@ -24,7 +12,7 @@ int len(char *str)
  */
 char *_strpbrk(char *s, char *accept)
 {
-	unsigned int lns = len(s), lnc = len(accept), i, i1;
+	unsigned int lns = _strlen(s), lnc = _strlen(accept), i, i1;
 
 	for (i = 0; i < lns; i++)
 	{

@@ -1,18 +1,5 @@
 #include <stdio.h>
-/**
- * len - calculates string length
- * @str:type string
- *
- * Return: length
- */
-int len(char *str)
-{
-	int i = 0;
-
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
+#include "main.h"
 /**
  * _strspn - Returns the number of bytes in the initial segment
  * of s which consist only of bytes from accept
@@ -21,12 +8,12 @@ int len(char *str)
  * @s: A string  pointer to search in  .
  * @accept: A string  pointer fo included charcter.
  *
- * Return: return lenght
+ * Return: return _strlenght
  */
 unsigned int _strspn(char *s, char *accept)
 {
-	/*lentghes counters */
-	unsigned int lns = len(s), lnc = len(accept), i, i1;
+	/*_strlentghes counters */
+	unsigned int lns = _strlen(s), lnc = _strlen(accept), i, i1;
 	unsigned int  sInclude  = 0;
 
 	for (i = 0; i < lns; i++)
