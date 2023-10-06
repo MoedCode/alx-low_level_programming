@@ -14,7 +14,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	unsigned long int index;
 	hash_node_t *new_node, *current_node;
 
-	if (!ht || !key || !key[0] || !value)
+	if (!ht || !ht->array || !ht->size ||!key  || !value)
 		return (0);
 
 	index = key_index((unsigned char *)key, ht->size);
