@@ -12,8 +12,7 @@ hash_table_t *hash_table_create(unsigned long int size)
 	hash_table_t *TABLE;
 
 	/*if (size < 1024 || !(TABLE = malloc((sizeof(*TABLE)))));*/
-	if (!size)
-		return (NULL);
+
 	TABLE = malloc(sizeof(hash_table_t));
 	if (!TABLE)
 		return (NULL);
@@ -29,7 +28,4 @@ hash_table_t *hash_table_create(unsigned long int size)
 		TABLE->array = NULL;
 
 	return (TABLE);
-
-
-
 }
