@@ -11,20 +11,20 @@ hash_table_t *hash_table_create(unsigned long int size)
 	unsigned long int i;
 
 	if (!size)
-		return (NULL);
+		return (0);
 	hashtTable = malloc(sizeof(hash_table_t));
-	if (hashtTable == NULL)
-		return (NULL);
+	if (hashtTable == 0)
+		return (0);
 
 	hashtTable->size = size;
 
 	hashtTable->array = malloc(sizeof(hash_node_t *) * size);
 
-	if (hashtTable->array == NULL)
-		return (NULL);
+	if (hashtTable->array == 0)
+		return (0);
 
 	for (i = 0; i < size; i++)
-		hashtTable->array[i] = NULL;
+		hashtTable->array[i] = 0;
 
 	return (hashtTable);
 }
