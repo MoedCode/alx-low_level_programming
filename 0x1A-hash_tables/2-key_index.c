@@ -1,15 +1,15 @@
 #include "hash_tables.h"
 #include "hash_tables.h"
 /**
- * key_index - gives the index of a key.
- * @key: key to find its index.
+ * key_HashIdx - gives the HashIdx of a key.
+ * @key: key to find its HashIdx.
  * @size: the  array size.
- * Return: key index
+ * Return: key HashIdx
  */
 
-unsigned long int key_index(const unsigned char *key, unsigned long int size)
+unsigned long int key_HashIdx(const unsigned char *key, unsigned long int size)
 {
-	unsigned long int index = hash_djb2(key);
+	unsigned long int HashIdx = hash_djb2(key);
 
-	return (index % size);
+	return (HashIdx % size);
 }
