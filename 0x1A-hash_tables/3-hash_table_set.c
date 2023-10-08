@@ -10,7 +10,7 @@
  *
  * Return: (1) if succeeded, (0) for any failure.
  */
-int hash_table_set(hash_table_t *ht, const char *key, const char *value);
+
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	hash_node_t *cur_node, *new_node;
