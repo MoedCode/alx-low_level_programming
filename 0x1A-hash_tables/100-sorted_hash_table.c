@@ -1,7 +1,8 @@
 #include "hash_tables.h"
+#include <string.h>
 
 /**
- * hash_table_create -  creates a hash table
+ * shash_table_create -  creates a hash table
  * @size:  array size
  * Return: pointer to the hash table
  */
@@ -25,13 +26,14 @@ shash_table_t *shash_table_create(unsigned long int size)
 
 	for (i = 0; i < size; i++)
 		hashtTable->array[i] = 0;
-    hashtTable->shead = NULL;
-    hashtTable->stail = NULL;
+	hashtTable->shead = NULL;
+	hashtTable->stail = NULL;
 	return (hashtTable);
 }
-
+/*===========================================*/
+/*===========================================*/
 /**
- * hash_table_set - Adds an element to the hash table's array.
+ * shash_table_set - Adds an element to the hash table's array.
  * @ht: Pointer to the hash table.
  * @key: Key of the hash table array, which is an
  * array of nodes where each node is a key-value pair.
@@ -39,14 +41,15 @@ shash_table_t *shash_table_create(unsigned long int size)
  *
  * Return: (1) if succeeded, (0) for any failure.
  */
+int shash_table_set(shash_table_t *ht, const char *key, const char *value);
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
 	shash_node_t *cur_node, *new_node;
 	unsigned long int hashIdx;
-    /* parameter  Checking */
+	/* parameter  Checking */
 	if (!ht || !ht->array || !ht->size || !key || !value)
 		return (0);
-    /*  Hshing */
+	/*  Hshing */
 	hashIdx = key_index((unsigned char *)key, ht->size);
 	/* Check if the key already exists */
 	for (cur_node = ht->array[hashIdx]; cur_node; cur_node = cur_node->next)
@@ -76,11 +79,45 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	new_node->next = ht->array[hashIdx];
 	ht->array[hashIdx] = new_node;
 
+	/* handle sorted linked list queue */
+	if (!ht->shead)
+	{
+		ht->shead = new_node;
+		ht->stail = new_node;
+		new_node->snext = NULL;
+		new_node->sprev = NULL;
+	}
+	else if (strcmp(ht->shead->key, key) > 0)
+	{
+		new_node->sprev = NULL;
+		new_node->snext = ht->shead;
+		ht->shead->sprev = new_node;
+		ht->shead = new_node;
+
+	}
+	else
+	{
+	for (cur_node = ht->shead; cur_node && strcmp(ht->shead->key, key) > 0;
+		cur_node = cur_node->snext)
+		;
+	new_node->sprev = cur_node;
+	new_node->snext = cur_node->snext;
+
+	if (!cur_node->snext)
+		ht->stail = new_node;
+	else
+		cur_node->snext->sprev = new_node;
+	cur_node->snext = new_node;
+
+	return (1);
+
+	}
+
 	return (1);
 }
 
 /**
- * hash_table_get - get the value by a given key.
+ * shash_table_get - get the value by a given key.
  * @ht: pointer to hash table
  * @key: key to look for
  * Return: (the value) associated with the key
@@ -105,7 +142,7 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 }
 
 /**
- * hash_table_print - prints a hash table
+ * shash_table_print - prints a hash table
  * @ht: pointer to the hash table
  */
 void shash_table_print(const shash_table_t *ht)
