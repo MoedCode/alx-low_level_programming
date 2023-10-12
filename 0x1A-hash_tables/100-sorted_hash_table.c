@@ -1,4 +1,6 @@
 #include "hash_tables.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 /**
@@ -125,47 +127,80 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
  */
 char *shash_table_get(const shash_table_t *ht, const char *key)
 {
-	unsigned long int index;
+	unsigned long int hashIdx;
 	shash_node_t *cur_node;
 
 	if (!ht || !key || key[0] == '\0')
 		return (0);
-	index = key_index((unsigned char *)key, ht->size);
+	hashIdx = key_index((unsigned char *)key, ht->size);
+	if (hashIdx >= ht->size)
+		return (NULL);
 
-	for (cur_node = ht->array[index]; cur_node; cur_node = cur_node->next)
-	{
-		if (strcmp(cur_node->key, key) == 0)
-			return (cur_node->value);
+	for (cur_node = ht->shead; cur_node && !strcmp(cur_node->key, key);
+		cur_node = cur_node->snext)
+		;
 
-	}
-	return (0);
+	return ((!cur_node) ? NULL : cur_node->value);
 }
 
 /**
- * shash_table_print - prints a hash table
+ * shash_table_print - prints   sorted hash table "Queues"
  * @ht: pointer to the hash table
  */
 void shash_table_print(const shash_table_t *ht)
 {
-	size_t i;
-	shash_node_t *cur_node;
-	int printed = 0;  /* Track whether anything has been printed */
+	shash_node_t *node;
 
-	if (!ht || !ht->array || !ht->size)
+	if (!ht || ht->shead)
 		return;
 	putchar('{');
-	for (i = 0; i < ht->size; i++)
+	for (node = ht->shead; node; node = node->snext)
 	{
-		if (!ht->array[i] || !ht->array[i]->key)
-			continue;
-
-		for (cur_node = ht->array[i]; cur_node; cur_node = cur_node->next)
-		{
-			if (printed)
-				printf(", ");  /* Add a comma and space before the key-value pair */
-			printf("'%s': '%s'", cur_node->key, cur_node->value);
-			printed = 1;  /* Set to 1 to indicate that something has been printed */
-		}
+		printf("'%s' : '%s'", node->key, node->value);
+		if (node)
+			printf(", ");
 	}
 	printf("}\n");
+
+}
+/**
+ * shash_table_print - prints   sorted hash table "Queues"
+ * in reversed order or "as stack"
+ * @ht: pointer to the hash table
+ */
+void shash_table_print_rev(const shash_table_t *ht)
+{
+	shash_node_t *node;
+
+	if (!ht || ht->shead)
+		return;
+	putchar('{');
+	for (node = ht->stail; node; node = node->sprev)
+	{
+		printf("'%s' : '%s'", node->key, node->value);
+		if (node)
+			printf(", ");
+	}
+	printf("}\n");
+
+}
+/**
+ * shash_table_delete - Deletes a sorted hash table "Queues".
+ * @ht: A pointer to the sorted hash table.
+ */
+void shash_table_delete(shash_table_t *ht)
+{
+	shash_table_t *_ht = ht;
+	shash_node_t *tmp, *node;
+
+	for (node = ht->shead; node; tmp = node->next)
+	{
+		free(node->key);
+		free(node->value);
+		free(node);
+		node = tmp;
+	}
+	free(_ht->array);
+	free(_ht);
+
 }
