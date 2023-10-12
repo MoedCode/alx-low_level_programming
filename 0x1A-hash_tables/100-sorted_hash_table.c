@@ -56,9 +56,13 @@ shash_table_t *shash_table_create(unsigned long int size)
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
 	shash_node_t *cur_node, *new_node;
+	char *_value;
 	unsigned long int hashIdx;
 
 	if (!ht || !ht->array || !ht->size || !key || !value)
+		return (0);
+	_value = strdup(value);
+	if (_value)
 		return (0);
 
 	hashIdx = key_index((unsigned char *)key, ht->size);
@@ -68,34 +72,37 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		if (strcmp(key, cur_node->key) == 0)
 		{
 			free(cur_node->value);
-			cur_node->value = strdup(value);
+			cur_node->value = _value;
 			return (1);
 		}
 	}
 
-	new_node = malloc(sizeof(*new_node));
+	new_node = malloc(sizeof(shash_node_t));
 	if (!new_node)
-		return (0);
-
-	new_node->key = strdup(key);
-	new_node->value = strdup(value);
-
-	if (!new_node->key || !new_node->value)
 	{
-		free(new_node->key);
-		free(new_node->value);
+		free(_value);
 		return (0);
 	}
 
+	new_node->key = strdup(key);
+	if (!new_node->key)
+	{
+		free(new_node);
+		free(_value);
+		return (0);
+	}
+
+	new_node->value = _value;
 	new_node->next = ht->array[hashIdx];
 	ht->array[hashIdx] = new_node;
 
+
 	if (!ht->shead)
 	{
-		ht->shead = new_node;
-		ht->stail = new_node;
-		new_node->snext = NULL;
 		new_node->sprev = NULL;
+		new_node->snext = NULL;
+		ht->shead  = new_node;
+		ht->stail = new_node;
 	}
 	else if (strcmp(ht->shead->key, key) > 0)
 	{
