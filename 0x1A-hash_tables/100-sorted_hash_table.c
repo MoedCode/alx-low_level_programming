@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+shash_table_t *shash_table_create(unsigned long int size);
+int shash_table_set(shash_table_t *ht, const char *key, const char *value);
+char *shash_table_get(const shash_table_t *ht, const char *key);
+void shash_table_print(const shash_table_t *ht);
+void shash_table_print_rev(const shash_table_t *ht);
+void shash_table_delete(shash_table_t *ht);
 
 /**
  * shash_table_create - Creates a sorted hash table.
@@ -24,7 +30,7 @@ shash_table_t *shash_table_create(unsigned long int size)
 
 	ht->size = size;
 	ht->array = malloc(sizeof(shash_node_t *) * size);
-	if (ht->array == NULL)
+	if (!ht->array)
 		return (NULL);
 
 	for (i = 0; i < size; i++)
@@ -45,7 +51,7 @@ shash_table_t *shash_table_create(unsigned long int size)
  *
  * Return: (1) if succeeded, (0) for any failure.
  */
-int shash_table_set(shash_table_t *ht, const char *key, const char *value);
+
 
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
@@ -57,9 +63,9 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 
 	hashIdx = key_index((unsigned char *)key, ht->size);
 
-	for (cur_node = ht->array[hashIdx]; cur_node; cur_node = cur_node->next)
+	for (cur_node = ht->shead; cur_node; cur_node = cur_node->next)
 	{
-		if (!strcmp(key, cur_node->key))
+		if (strcmp(key, cur_node->key))
 		{
 			free(cur_node->value);
 			cur_node->value = strdup(value);
@@ -103,7 +109,8 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	}
 	else
 	{
-		for (cur_node = ht->shead; cur_node && strcmp(ht->shead->key, key) > 0; cur_node = cur_node->snext)
+		for (cur_node = ht->shead; cur_node && strcmp(ht->shead->key, key) > 0;
+			cur_node = cur_node->snext)
 			;
 
 		new_node->sprev = cur_node;
@@ -140,7 +147,8 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 	if (hashIdx >= ht->size)
 		return (NULL);
 
-	for (node = ht->shead; node && strcmp(node->key, key) != 0; node = node->snext)
+	for (node = ht->shead; node && strcmp(node->key, key) != 0;
+		node = node->snext)
 		;
 
 	return ((node == NULL) ? NULL : node->value);
