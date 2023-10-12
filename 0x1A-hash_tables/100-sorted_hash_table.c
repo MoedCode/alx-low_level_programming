@@ -52,7 +52,7 @@ shash_table_t *shash_table_create(unsigned long int size)
  * Return: (1) if succeeded, (0) for any failure.
  */
 
-
+/*
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
 	shash_node_t *cur_node, *new_node;
@@ -129,7 +129,82 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 
 	return (1);
 }
+*/
 
+
+int shash_table_set(shash_table_t *ht, const char *key, const char *value)
+{
+	shash_node_t *new, *tmp;
+	char *_value;
+	unsigned long int hashIdx;
+
+	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
+		return (0);
+
+	_value = strdup(value);
+	if (_value == NULL)
+		return (0);
+
+	hashIdx = key_index((const unsigned char *)key, ht->size);
+	tmp = ht->shead;
+	while (tmp)
+	{
+		if (strcmp(tmp->key, key) == 0)
+		{
+			free(tmp->value);
+			tmp->value = _value;
+			return (1);
+		}
+		tmp = tmp->snext;
+	}
+
+	new = malloc(sizeof(shash_node_t));
+	if (new == NULL)
+	{
+		free(_value);
+		return (0);
+	}
+	new->key = strdup(key);
+	if (new->key == NULL)
+	{
+		free(_value);
+		free(new);
+		return (0);
+	}
+	new->value = _value;
+	new->next = ht->array[hashIdx];
+	ht->array[hashIdx] = new;
+
+	if (ht->shead == NULL)
+	{
+		new->sprev = NULL;
+		new->snext = NULL;
+		ht->shead = new;
+		ht->stail = new;
+	}
+	else if (strcmp(ht->shead->key, key) > 0)
+	{
+		new->sprev = NULL;
+		new->snext = ht->shead;
+		ht->shead->sprev = new;
+		ht->shead = new;
+	}
+	else
+	{
+		tmp = ht->shead;
+		while (tmp->snext != NULL && strcmp(tmp->snext->key, key) < 0)
+			tmp = tmp->snext;
+		new->sprev = tmp;
+		new->snext = tmp->snext;
+		if (tmp->snext == NULL)
+			ht->stail = new;
+		else
+			tmp->snext->sprev = new;
+		tmp->snext = new;
+	}
+
+	return (1);
+}
 /**
  * shash_table_get - Retrieve the value associated with
  *                   a key in a sorted hash table.
