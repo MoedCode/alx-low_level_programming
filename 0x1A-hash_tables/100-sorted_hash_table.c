@@ -103,8 +103,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	}
 	else
 	{
-		for (cur_node = ht->shead; cur_node && strcmp(ht->shead->key, key) > 0;
-		cur_node = cur_node->snext)
+		for (cur_node = ht->shead; cur_node && strcmp(ht->shead->key, key) > 0; cur_node = cur_node->snext)
 			;
 
 		new_node->sprev = cur_node;
@@ -141,8 +140,7 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 	if (hashIdx >= ht->size)
 		return (NULL);
 
-	for (node = ht->shead; node && strcmp(node->key, key) != 0;
-		node = node->snext)
+	for (node = ht->shead; node && strcmp(node->key, key) != 0; node = node->snext)
 		;
 
 	return ((node == NULL) ? NULL : node->value);
