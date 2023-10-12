@@ -52,80 +52,12 @@ shash_table_t *shash_table_create(unsigned long int size)
  * Return: (1) if succeeded, (0) for any failure.
  */
 
-
-int shash_table_set(shash_table_t *ht, const char *key, const char *value)
-{
-	shash_node_t *cur_node, *new_node;
-	unsigned long int hashIdx;
-
-	if (!ht || !ht->array || !ht->size || !key || !value)
-		return (0);
-
-	hashIdx = key_index((unsigned char *)key, ht->size);
-
-	for (cur_node = ht->shead; cur_node; cur_node = cur_node->next)
-	{
-		if (strcmp(key, cur_node->key))
-		{
-			free(cur_node->value);
-			cur_node->value = strdup(value);
-			return (1);
-		}
-	}
-
-	new_node = malloc(sizeof(*new_node));
-	if (!new_node)
-		return (0);
-
-	new_node->key = strdup(key);
-	new_node->value = strdup(value);
-
-	if (!new_node->key || !new_node->value)
-	{
-		if (new_node->key)
-			free(new_node->key);
-		if (new_node->value)
-			free(new_node->value);
-		free(new_node);
-		return (0);
-	}
-
-	new_node->next = ht->array[hashIdx];
-	ht->array[hashIdx] = new_node;
-
-	if (!ht->shead)
-	{
-		ht->shead = new_node;
-		ht->stail = new_node;
-		new_node->snext = NULL;
-		new_node->sprev = NULL;
-	}
-	else if (strcmp(ht->shead->key, key) > 0)
-	{
-		new_node->sprev = NULL;
-		new_node->snext = ht->shead;
-		ht->shead->sprev = new_node;
-		ht->shead = new_node;
-	}
-	else
-	{
-		for (cur_node = ht->shead; cur_node && strcmp(ht->shead->key, key) > 0;
-			cur_node = cur_node->snext)
-			;
-
-		new_node->sprev = cur_node;
-		new_node->snext = cur_node->snext;
-
-		if (!cur_node->snext)
-			ht->stail = new_node;
-		else
-			cur_node->snext->sprev = new_node;
-		cur_node->snext = new_node;
-	}
-
-	return (1);
-}
-
+shash_table_t *shash_table_create(unsigned long int size);
+int shash_table_set(shash_table_t *ht, const char *key, const char *value);
+char *shash_table_get(const shash_table_t *ht, const char *key);
+void shash_table_print(const shash_table_t *ht);
+void shash_table_print_rev(const shash_table_t *ht);
+void shash_table_delete(shash_table_t *ht);
 /**
  * shash_table_get - Retrieve the value associated with
  *                   a key in a sorted hash table.
