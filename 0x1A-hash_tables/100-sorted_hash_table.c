@@ -11,10 +11,10 @@ void shash_table_delete(shash_table_t *ht);
 
 /**
  * shash_table_create - Creates a sorted hash table.
- * @size: The size of the new sorted hash table.
+ * @size: The size of the newNode sorted hash table.
  *
  * Return: If an error occurs - NULL.
- *         Otherwise - a pointer to the new sorted hash table.
+ *         Otherwise - a pointer to the newNode sorted hash table.
  */
 shash_table_t *shash_table_create(unsigned long int size)
 {
@@ -52,89 +52,12 @@ shash_table_t *shash_table_create(unsigned long int size)
  * Return: (1) if succeeded, (0) for any failure.
  */
 
-/*
-int shash_table_set(shash_table_t *ht, const char *key, const char *value)
-{
-	shash_node_t *cur_node, *new_node;
-	char *_value;
-	unsigned long int hashIdx;
 
-	if (!ht || !ht->array || !ht->size || !key || !value)
-		return (0);
-	_value = strdup(value);
-	if (_value)
-		return (0);
-
-	hashIdx = key_index((unsigned char *)key, ht->size);
-
-	for (cur_node = ht->shead; cur_node; cur_node = cur_node->next)
-	{
-		if (strcmp(key, cur_node->key) == 0)
-		{
-			free(cur_node->value);
-			cur_node->value = _value;
-			return (1);
-		}
-	}
-
-	new_node = malloc(sizeof(shash_node_t));
-	if (!new_node)
-	{
-		free(_value);
-		return (0);
-	}
-
-	new_node->key = strdup(key);
-	if (!new_node->key)
-	{
-		free(new_node);
-		free(_value);
-		return (0);
-	}
-
-	new_node->value = _value;
-	new_node->next = ht->array[hashIdx];
-	ht->array[hashIdx] = new_node;
-
-
-	if (!ht->shead)
-	{
-		new_node->sprev = NULL;
-		new_node->snext = NULL;
-		ht->shead  = new_node;
-		ht->stail = new_node;
-	}
-	else if (strcmp(ht->shead->key, key) > 0)
-	{
-		new_node->sprev = NULL;
-		new_node->snext = ht->shead;
-		ht->shead->sprev = new_node;
-		ht->shead = new_node;
-	}
-	else
-	{
-		for (cur_node = ht->shead; cur_node && strcmp(ht->shead->key, key) > 0;
-			cur_node = cur_node->snext)
-			;
-
-		new_node->sprev = cur_node;
-		new_node->snext = cur_node->snext;
-
-		if (!cur_node->snext)
-			ht->stail = new_node;
-		else
-			cur_node->snext->sprev = new_node;
-		cur_node->snext = new_node;
-	}
-
-	return (1);
-}
-*/
 
 
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
-	shash_node_t *new, *tmp;
+	shash_node_t *newNode, *tmp;
 	char *_value;
 	unsigned long int hashIdx;
 
@@ -146,8 +69,8 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		return (0);
 
 	hashIdx = key_index((const unsigned char *)key, ht->size);
-	tmp = ht->shead;
-	while (tmp)
+
+	for (tmp = ht->shead; tmp; tmp = tmp->snext; )
 	{
 		if (strcmp(tmp->key, key) == 0)
 		{
@@ -155,52 +78,52 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 			tmp->value = _value;
 			return (1);
 		}
-		tmp = tmp->snext;
+
 	}
 
-	new = malloc(sizeof(shash_node_t));
-	if (new == NULL)
+	newNode = malloc(sizeof(shash_node_t));
+	if (newNode == NULL)
 	{
 		free(_value);
 		return (0);
 	}
-	new->key = strdup(key);
-	if (new->key == NULL)
+	newNode->key = strdup(key);
+	if (newNode->key == NULL)
 	{
 		free(_value);
-		free(new);
+		free(newNode);
 		return (0);
 	}
-	new->value = _value;
-	new->next = ht->array[hashIdx];
-	ht->array[hashIdx] = new;
+	newNode->value = _value;
+	newNode->next = ht->array[hashIdx];
+	ht->array[hashIdx] = newNode;
 
 	if (ht->shead == NULL)
 	{
-		new->sprev = NULL;
-		new->snext = NULL;
-		ht->shead = new;
-		ht->stail = new;
+		newNode->sprev = NULL;
+		newNode->snext = NULL;
+		ht->shead = newNode;
+		ht->stail = newNode;
 	}
 	else if (strcmp(ht->shead->key, key) > 0)
 	{
-		new->sprev = NULL;
-		new->snext = ht->shead;
-		ht->shead->sprev = new;
-		ht->shead = new;
+		newNode->sprev = NULL;
+		newNode->snext = ht->shead;
+		ht->shead->sprev = newNode;
+		ht->shead = newNode;
 	}
 	else
 	{
 		tmp = ht->shead;
 		while (tmp->snext != NULL && strcmp(tmp->snext->key, key) < 0)
 			tmp = tmp->snext;
-		new->sprev = tmp;
-		new->snext = tmp->snext;
+		newNode->sprev = tmp;
+		newNode->snext = tmp->snext;
 		if (tmp->snext == NULL)
-			ht->stail = new;
+			ht->stail = newNode;
 		else
-			tmp->snext->sprev = new;
-		tmp->snext = new;
+			tmp->snext->sprev = newNode;
+		tmp->snext = newNode;
 	}
 
 	return (1);

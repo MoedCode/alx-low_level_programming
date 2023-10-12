@@ -1,0 +1,78 @@
+/*
+int shash_table_set(shash_table_t *ht, const char *key, const char *value)
+{
+	shash_node_t *cur_node, *newNode_node;
+	char *_value;
+	unsigned long int hashIdx;
+
+	if (!ht || !ht->array || !ht->size || !key || !value)
+		return (0);
+	_value = strdup(value);
+	if (_value)
+		return (0);
+
+	hashIdx = key_index((unsigned char *)key, ht->size);
+
+	for (cur_node = ht->shead; cur_node; cur_node = cur_node->next)
+	{
+		if (strcmp(key, cur_node->key) == 0)
+		{
+			free(cur_node->value);
+			cur_node->value = _value;
+			return (1);
+		}
+	}
+
+	newNode_node = malloc(sizeof(shash_node_t));
+	if (!newNode_node)
+	{
+		free(_value);
+		return (0);
+	}
+
+	newNode_node->key = strdup(key);
+	if (!newNode_node->key)
+	{
+		free(newNode_node);
+		free(_value);
+		return (0);
+	}
+
+	newNode_node->value = _value;
+	newNode_node->next = ht->array[hashIdx];
+	ht->array[hashIdx] = newNode_node;
+
+
+	if (!ht->shead)
+	{
+		newNode_node->sprev = NULL;
+		newNode_node->snext = NULL;
+		ht->shead  = newNode_node;
+		ht->stail = newNode_node;
+	}
+	else if (strcmp(ht->shead->key, key) > 0)
+	{
+		newNode_node->sprev = NULL;
+		newNode_node->snext = ht->shead;
+		ht->shead->sprev = newNode_node;
+		ht->shead = newNode_node;
+	}
+	else
+	{
+		for (cur_node = ht->shead; cur_node && strcmp(ht->shead->key, key) > 0;
+			cur_node = cur_node->snext)
+			;
+
+		newNode_node->sprev = cur_node;
+		newNode_node->snext = cur_node->snext;
+
+		if (!cur_node->snext)
+			ht->stail = newNode_node;
+		else
+			cur_node->snext->sprev = newNode_node;
+		cur_node->snext = newNode_node;
+	}
+
+	return (1);
+}
+*/
