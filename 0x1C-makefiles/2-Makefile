@@ -1,1 +1,4 @@
-#!/usr/bin/env bash
+cc = gcc
+SRC = mai.c school.c
+OBJ = main.o school.o
+
