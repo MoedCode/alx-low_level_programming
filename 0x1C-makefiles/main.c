@@ -1,8 +1,12 @@
-#include <stdio.h>
+#include "m.h"
 
+/**
+ * main - Entry point
+ *
+ * Return: Always
+ */
 int main(void)
 {
-char *str = "Main\n";
-printf("%s",str);
-return 0;
+	print_school();
+	return (EXIT_SUCCESS);
 }

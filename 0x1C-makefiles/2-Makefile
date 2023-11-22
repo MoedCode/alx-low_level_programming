@@ -1,4 +1,11 @@
-cc = gcc
-SRC = mai.c school.c
-OBJ = main.o school.o
+CC = gcc
+SRC = main.c school.c
+# : replace all in SRC
+OBJ = $(SRC:.c=.o)
+NMAE = school
 
+all: $(NAME)
+# defines a rule that specifies how to build the target $(NAME)
+#using the prerequisites $(OBJ)
+$(NAME):$(OBJ)
+	$(CC) $(SRC) -o $(NAME)
