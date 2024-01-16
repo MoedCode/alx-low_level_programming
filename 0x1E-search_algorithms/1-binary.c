@@ -11,7 +11,6 @@
  * @value: Value to search in the concern array
  * Return: (int) index if element that mach the concern value
  * or (-1) if that value not fond or null array pointer
-
  */
 
 
@@ -40,18 +39,18 @@ int binary_search(int *array, size_t size, int value)
  * print_arr - print sconce  in array
  *
  * @array: pointer to first index in integers array
- * @left: index to start with
- * @right: index to stop at.
+ * @Left: index to start with
+ * @Right: index to stop at.
  */
 
-void print_arr(int *array, int left, int right)
+void print_arr(int *array, int Left, int Right)
 {
 	int i;
 
 	printf("Searching in array: ");
-	for (i = left; i <= right; i++)
+	for (i = Left; i <= Right; i++)
 	{
-		if (i == right)
+		if (i == Right)
 		{
 			printf("%d", array[i]);
 			continue;
