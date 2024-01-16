@@ -25,3 +25,33 @@ int linear_search(int *array, size_t size, int value)
 	}
 	return  (-1);
 }
+int binary_search_rec(int *array, size_t startIdx,size_t size, int value)
+{
+	  size_t midIdx = 0;
+
+	if (!array || !size)
+		return (-1);
+
+
+	/*check case A */
+	if (array[midIdx] > value)
+	{
+
+		binary_search_rec(array, midIdx, size, value);
+
+
+	}
+	/*check case B */
+	if (array[midIdx] < value)
+	{
+
+	}
+	/*check case C */
+	if (array[midIdx] == value)
+		return (midIdx);
+
+	print_int_arr(array, size);
+	printf("mid index val= [%i]  value[%d]\n",(int)midIdx, value);
+	return (0);
+
+}
