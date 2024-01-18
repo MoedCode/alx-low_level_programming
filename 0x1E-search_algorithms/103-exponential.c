@@ -3,7 +3,7 @@
 
 
 /**
- * binary_search_01  -  searches for a value in a sorted array of integers
+ * binary_search_asst  -  searches for a value in a sorted array of integers
  * using the Binary search algorithm
  *
  * @array: pointer to first index in integers array
